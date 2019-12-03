@@ -24,7 +24,7 @@ public class PolarizingBiomes
 	public static void onRegisterBiome(RegistryEvent.Register<Biome> event)
 	{
 		//10 is what the vast majority of vanilla biomes use
-		registerBiome(event, new FrozenForest(), "frozen_forest", 10, BiomeType.ICY, Type.COLD, Type.FOREST);
+		registerBiome(event, new FrozenForest(), "frozen_forest", 10, BiomeType.ICY, Type.COLD, Type.FOREST, Type.SNOWY, Type.OVERWORLD);
 	}
 
 	private static void registerBiome(RegistryEvent.Register<Biome> event, Biome biome, String registryName, int spawnWeight, BiomeType spawnType, Type... types)
