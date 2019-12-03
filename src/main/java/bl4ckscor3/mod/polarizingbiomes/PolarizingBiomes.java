@@ -1,5 +1,6 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
+import bl4ckscor3.mod.polarizingbiomes.biomes.DenseTaigaForest;
 import bl4ckscor3.mod.polarizingbiomes.biomes.FrozenForest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -25,6 +26,7 @@ public class PolarizingBiomes
 	{
 		//10 is what the vast majority of vanilla biomes use
 		registerBiome(event, new FrozenForest(), "frozen_forest", 10, BiomeType.ICY, Type.COLD, Type.FOREST, Type.SNOWY, Type.OVERWORLD);
+		registerBiome(event, new DenseTaigaForest(), "dense_taiga_forest", 10, BiomeType.ICY, Type.COLD, Type.CONIFEROUS, Type.FOREST, Type.SNOWY, Type.OVERWORLD);
 	}
 
 	private static void registerBiome(RegistryEvent.Register<Biome> event, Biome biome, String registryName, int spawnWeight, BiomeType spawnType, Type... types)
