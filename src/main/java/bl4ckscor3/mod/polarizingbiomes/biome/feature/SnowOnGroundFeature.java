@@ -32,7 +32,6 @@ public class SnowOnGroundFeature extends Feature<NoFeatureConfig>
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
 	{
 		MutableBlockPos mPos = new MutableBlockPos();
-		MutableBlockPos mPosDown = new MutableBlockPos();
 
 		for(int xi = 0; xi < 16; xi++)
 		{
@@ -42,11 +41,14 @@ public class SnowOnGroundFeature extends Feature<NoFeatureConfig>
 				int z = pos.getZ() + zi;
 
 				mPos.setPos(x, world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z), z);
-				mPosDown.setPos(mPos).move(Direction.DOWN);
 
-				if(world.getBlockState(mPos).getBlock() != Blocks.SNOW)
+				if(world.getBlockState(mPos).isAir(world, mPos))
 				{
-					BlockState below = world.getBlockState(mPosDown);
+					MutableBlockPos mPosDown = new MutableBlockPos();
+					BlockState below;
+
+					mPosDown.setPos(mPos).move(Direction.DOWN);
+					below = world.getBlockState(mPosDown);
 
 					if(below.getBlock() == Blocks.GRASS_BLOCK)
 					{
