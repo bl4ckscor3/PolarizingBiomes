@@ -5,10 +5,13 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class DenseTaigaForest extends Biome
@@ -19,8 +22,8 @@ public class DenseTaigaForest extends Biome
 				.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
 				.precipitation(RainType.SNOW)
 				.category(Category.ICY)
-				.depth(0.075F)
-				.scale(0.01F)
+				.depth(0.5F)
+				.scale(0.15F)
 				.temperature(0.0F)
 				.downfall(0.5F)
 				.waterColor(0x3F76E4)
@@ -38,7 +41,16 @@ public class DenseTaigaForest extends Biome
 		DefaultBiomeFeatures.addOres(this);
 		DefaultBiomeFeatures.addSedimentDisks(this);
 		DefaultBiomeFeatures.addSprings(this);
+		DefaultBiomeFeatures.addDefaultFlowers(this);
+		DefaultBiomeFeatures.addSparseGrass(this);
 		DefaultBiomeFeatures.addFreezeTopLayer(this);
+		addFeature(
+				GenerationStage.Decoration.VEGETAL_DECORATION,
+				Biome.createDecoratedFeature(
+						Feature.SPRUCE_TREE,
+						IFeatureConfig.NO_FEATURE_CONFIG,
+						Placement.COUNT_EXTRA_HEIGHTMAP,
+						new AtSurfaceWithExtraConfig(1, 0.1F, 1)));
 		PolarizingBiomeFeatures.addSnowOnGround(this);
 		PolarizingBiomeFeatures.addSlimTaigaTrees(this);
 
