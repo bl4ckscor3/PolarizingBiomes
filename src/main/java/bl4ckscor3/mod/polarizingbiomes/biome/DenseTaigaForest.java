@@ -1,4 +1,4 @@
-package bl4ckscor3.mod.polarizingbiomes.biomes;
+package bl4ckscor3.mod.polarizingbiomes.biome;
 
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomeFeatures;
 import bl4ckscor3.mod.snowundertrees.SnowUnderTrees;

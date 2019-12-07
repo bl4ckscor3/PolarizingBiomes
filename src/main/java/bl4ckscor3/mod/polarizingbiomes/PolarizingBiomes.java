@@ -1,7 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
-import bl4ckscor3.mod.polarizingbiomes.biomes.DenseTaigaForest;
-import bl4ckscor3.mod.polarizingbiomes.biomes.FrozenForest;
+import bl4ckscor3.mod.polarizingbiomes.biome.DenseTaigaForest;
+import bl4ckscor3.mod.polarizingbiomes.biome.FrozenForest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
