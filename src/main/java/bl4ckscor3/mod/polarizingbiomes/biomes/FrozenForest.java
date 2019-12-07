@@ -1,6 +1,6 @@
 package bl4ckscor3.mod.polarizingbiomes.biomes;
 
-import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomeFeatures;
+import bl4ckscor3.mod.snowundertrees.SnowUnderTrees;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +47,7 @@ public class FrozenForest extends Biome
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addSparseGrass(this);
 		DefaultBiomeFeatures.addFreezeTopLayer(this);
-		PolarizingBiomeFeatures.addSnowOnGround(this);
+		SnowUnderTrees.addSnowUnderTrees(this);
 
 		addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.RABBIT, 10, 2, 3));
 		addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.POLAR_BEAR, 1, 1, 2));

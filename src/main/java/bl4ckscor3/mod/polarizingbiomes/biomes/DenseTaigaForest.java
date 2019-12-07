@@ -1,6 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes.biomes;
 
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomeFeatures;
+import bl4ckscor3.mod.snowundertrees.SnowUnderTrees;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -43,7 +44,6 @@ public class DenseTaigaForest extends Biome
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addSparseGrass(this);
-		DefaultBiomeFeatures.addFreezeTopLayer(this);
 		addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Biome.createDecoratedFeature(
@@ -51,8 +51,9 @@ public class DenseTaigaForest extends Biome
 						IFeatureConfig.NO_FEATURE_CONFIG,
 						Placement.COUNT_EXTRA_HEIGHTMAP,
 						new AtSurfaceWithExtraConfig(1, 0.1F, 1)));
-		PolarizingBiomeFeatures.addSnowOnGround(this);
 		PolarizingBiomeFeatures.addSlimTaigaTrees(this);
+		DefaultBiomeFeatures.addFreezeTopLayer(this);
+		SnowUnderTrees.addSnowUnderTrees(this);
 
 		addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.RABBIT, 10, 2, 3));
 		addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.POLAR_BEAR, 1, 1, 2));
