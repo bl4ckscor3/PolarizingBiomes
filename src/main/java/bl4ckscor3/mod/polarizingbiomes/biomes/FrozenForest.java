@@ -74,10 +74,4 @@ public class FrozenForest extends Biome
 	{
 		return 0xFEFEFE;
 	}
-
-	@Override
-	public float getSpawningChance()
-	{
-		return 0.07F;
-	}
 }
