@@ -24,7 +24,7 @@ public class FrozenForest extends Biome
 				.category(Category.ICY)
 				.depth(0.075F)
 				.scale(0.04F)
-				.temperature(0.0F)
+				.temperature(-2.0F)
 				.downfall(0.5F)
 				.waterColor(0x3F76E4)
 				.waterFogColor(0x050533)
