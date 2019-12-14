@@ -1,6 +1,6 @@
-//1
 package bl4ckscor3.mod.polarizingbiomes.biome;
 
+import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomePlacements;
 import bl4ckscor3.mod.snowundertrees.SnowUnderTrees;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
@@ -49,20 +49,8 @@ public class FrozenLakes extends Biome
 		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addOres(this);
 		DefaultBiomeFeatures.addSedimentDisks(this);
-		addFeature(
-				GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-				Biome.createDecoratedFeature(
-						Feature.LAKE,
-						new LakesConfig(Blocks.ICE.getDefaultState()),
-						Placement.WATER_LAKE,
-						new LakeChanceConfig(1)));
-		addFeature(
-				GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-				Biome.createDecoratedFeature(
-						Feature.LAKE,
-						new LakesConfig(Blocks.ICE.getDefaultState()),
-						Placement.WATER_LAKE,
-						new LakeChanceConfig(1)));
+		addLakes();
+		addLakes();
 		addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Biome.createDecoratedFeature(
@@ -107,5 +95,16 @@ public class FrozenLakes extends Biome
 	public int getFoliageColor(BlockPos pos)
 	{
 		return 0xFEFEFE;
+	}
+
+	private void addLakes()
+	{
+		addFeature(
+				GenerationStage.Decoration.LOCAL_MODIFICATIONS,
+				Biome.createDecoratedFeature(
+						Feature.LAKE,
+						new LakesConfig(Blocks.ICE.getDefaultState()),
+						PolarizingBiomePlacements.LAKE_AT_SURFACE,
+						new LakeChanceConfig(1)));
 	}
 }
