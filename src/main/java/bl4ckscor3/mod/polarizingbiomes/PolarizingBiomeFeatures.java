@@ -1,10 +1,12 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
+import bl4ckscor3.mod.polarizingbiomes.biome.feature.BigLakeFeature;
 import bl4ckscor3.mod.polarizingbiomes.biome.feature.SlimTaigaTreeFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.LakesConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
@@ -18,11 +20,13 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomeFeatures
 {
+	public static final Feature<LakesConfig> BIG_LAKE = (Feature<LakesConfig>)new BigLakeFeature(LakesConfig::deserialize).setRegistryName("big_lake");
 	public static final Feature<NoFeatureConfig> SLIM_TAIGA_TREE = (Feature<NoFeatureConfig>)new SlimTaigaTreeFeature(NoFeatureConfig::deserialize).setRegistryName("slim_taiga_tree");
 
 	@SubscribeEvent
 	public static void onRegisterFeature(RegistryEvent.Register<Feature<?>> event)
 	{
+		event.getRegistry().register(BIG_LAKE);
 		event.getRegistry().register(SLIM_TAIGA_TREE);
 	}
 
