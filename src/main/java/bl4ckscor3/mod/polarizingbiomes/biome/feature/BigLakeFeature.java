@@ -112,13 +112,13 @@ public class BigLakeFeature extends Feature<LakesConfig>
 					}
 				}
 
-				for(int x = 0; x < 16; ++x)
+				for(int x = 0; x < 32; ++x)
 				{
-					for(int z = 0; z < 16; ++z)
+					for(int z = 0; z < 32; ++z)
 					{
-						for(int y = 4; y < 8; ++y)
+						for(int y = 4; y < 16; ++y)
 						{
-							if(shouldPlace[(x * 16 + z) * 8 + y])
+							if(shouldPlace[(x * 32 + z) * 16 + y])
 							{
 								BlockPos blockPos = pos.add(x, y - 1, z);
 
@@ -132,37 +132,6 @@ public class BigLakeFeature extends Feature<LakesConfig>
 										world.setBlockState(blockPos, Blocks.GRASS_BLOCK.getDefaultState(), 2);
 								}
 							}
-						}
-					}
-				}
-
-				if(config.state.getMaterial() == Material.LAVA)
-				{
-					for(int x = 0; x < 16; ++x)
-					{
-						for(int z = 0; z < 16; ++z)
-						{
-							for(int y = 0; y < 8; ++y)
-							{
-								boolean flag = !shouldPlace[(x * 16 + z) * 8 + y] && (x < 15 && shouldPlace[((x + 1) * 16 + z) * 8 + y] || x > 0 && shouldPlace[((x - 1) * 16 + z) * 8 + y] || z < 15 && shouldPlace[(x * 16 + z + 1) * 8 + y] || z > 0 && shouldPlace[(x * 16 + (z - 1)) * 8 + y] || y < 7 && shouldPlace[(x * 16 + z) * 8 + y + 1] || y > 0 && shouldPlace[(x * 16 + z) * 8 + (y - 1)]);
-
-								if(flag && (y < 4 || rand.nextInt(2) != 0) && world.getBlockState(pos.add(x, y, z)).getMaterial().isSolid())
-									world.setBlockState(pos.add(x, y, z), Blocks.STONE.getDefaultState(), 2);
-							}
-						}
-					}
-				}
-
-				if(config.state.getMaterial() == Material.WATER)
-				{
-					for(int x = 0; x < 16; ++x)
-					{
-						for(int z = 0; z < 16; ++z)
-						{
-							BlockPos blockPos = pos.add(x, 4, z);
-
-							if (world.getBiome(blockPos).doesWaterFreeze(world, blockPos, false))
-								world.setBlockState(blockPos, Blocks.ICE.getDefaultState(), 2);
 						}
 					}
 				}
