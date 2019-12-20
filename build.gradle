@@ -9,6 +9,10 @@ buildscript {
     }
 }
 
+plugins {
+	id "com.wynprice.cursemaven" version "2.1.1"
+}
+
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
@@ -52,6 +56,8 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.14.4-28.1.96'
+	
+	compile "curse.maven:snow-under-trees:2837875"
 }
 
 jar {
