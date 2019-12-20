@@ -17,7 +17,7 @@ public class BigFrozenLakes extends AbstractFrozenLakes
 				.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
 				.precipitation(RainType.SNOW)
 				.category(Category.ICY)
-				.depth(1.0F)
+				.depth(0.2F)
 				.scale(0.15F)
 				.temperature(-2.0F)
 				.downfall(0.5F)

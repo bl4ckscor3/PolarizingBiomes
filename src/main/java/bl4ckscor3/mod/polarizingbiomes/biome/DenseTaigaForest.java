@@ -23,7 +23,7 @@ public class DenseTaigaForest extends Biome
 				.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
 				.precipitation(RainType.SNOW)
 				.category(Category.ICY)
-				.depth(0.5F)
+				.depth(0.2F)
 				.scale(0.18F)
 				.temperature(-0.5F)
 				.downfall(0.5F)

@@ -26,7 +26,7 @@ archivesBaseName = 'polarizingbiomes'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20191130-1.14.3'
+    mappings channel: 'snapshot', version: '20191220-1.14.3'
 	
     runs {
         client {
@@ -55,7 +55,7 @@ minecraft {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.1.96'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.1.107'
 	
 	compile "curse.maven:snow-under-trees:2837875"
 }

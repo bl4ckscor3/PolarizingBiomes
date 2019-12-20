@@ -22,7 +22,7 @@ public class FrozenForest extends Biome
 				.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
 				.precipitation(RainType.SNOW)
 				.category(Category.ICY)
-				.depth(0.75F)
+				.depth(0.2F)
 				.scale(0.06F)
 				.temperature(-2.0F)
 				.downfall(0.5F)
