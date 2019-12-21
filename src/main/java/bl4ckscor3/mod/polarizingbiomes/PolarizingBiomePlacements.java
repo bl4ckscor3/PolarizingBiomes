@@ -1,7 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
 import bl4ckscor3.mod.polarizingbiomes.placement.LakeAtSurface;
-import net.minecraft.world.gen.placement.LakeChanceConfig;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomePlacements
 {
-	public static final Placement<LakeChanceConfig> LAKE_AT_SURFACE = (Placement<LakeChanceConfig>)new LakeAtSurface(LakeChanceConfig::deserialize).setRegistryName("lake_at_surface");
+	public static final Placement<ChanceConfig> LAKE_AT_SURFACE = (Placement<ChanceConfig>)new LakeAtSurface(ChanceConfig::deserialize).setRegistryName("lake_at_surface");
 
 	@SubscribeEvent
 	public static void onRegisterFeature(RegistryEvent.Register<Placement<?>> event)

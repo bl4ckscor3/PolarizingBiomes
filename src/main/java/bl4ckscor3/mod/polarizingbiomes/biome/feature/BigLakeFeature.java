@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -17,20 +16,20 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakesConfig;
 
-public class BigLakeFeature extends Feature<LakesConfig>
+public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 {
 	private static final BlockState AIR = Blocks.CAVE_AIR.getDefaultState();
 
-	public BigLakeFeature(Function<Dynamic<?>, ? extends LakesConfig> configFactory)
+	public BigLakeFeature(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, LakesConfig config)
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BlockStateFeatureConfig config)
 	{
 		while(pos.getY() > 5 && world.isAirBlock(pos))
 		{
@@ -93,7 +92,7 @@ public class BigLakeFeature extends Feature<LakesConfig>
 								if(y >= 4 && material.isLiquid())
 									return false;
 
-								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.state)
+								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.field_227270_a_)
 									return false;
 							}
 						}
@@ -107,7 +106,7 @@ public class BigLakeFeature extends Feature<LakesConfig>
 						for(int y = 0; y < 16; ++y)
 						{
 							if(shouldPlace[(x * 32 + z) * 16 + y])
-								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.state, 2);
+								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.field_227270_a_, 2);
 						}
 					}
 				}
@@ -122,9 +121,9 @@ public class BigLakeFeature extends Feature<LakesConfig>
 							{
 								BlockPos blockPos = pos.add(x, y - 1, z);
 
-								if(Block.isDirt(world.getBlockState(blockPos).getBlock()) && world.getLightFor(LightType.SKY, pos.add(x, y, z)) > 0)
+								if(func_227250_b_(world.getBlockState(blockPos).getBlock()) && world.func_226658_a_(LightType.SKY, pos.add(x, y, z)) > 0) //isDirt, getLightFor
 								{
-									Biome biome = world.getBiome(blockPos);
+									Biome biome = world.func_226691_t_(blockPos); //getBiome
 
 									if(biome.getSurfaceBuilderConfig().getTop().getBlock() == Blocks.MYCELIUM)
 										world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState(), 2);

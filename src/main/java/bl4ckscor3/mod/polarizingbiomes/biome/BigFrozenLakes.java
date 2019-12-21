@@ -3,10 +3,9 @@ package bl4ckscor3.mod.polarizingbiomes.biome;
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomeFeatures;
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomePlacements;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.LakesConfig;
-import net.minecraft.world.gen.placement.LakeChanceConfig;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class BigFrozenLakes extends AbstractFrozenLakes
@@ -29,12 +28,8 @@ public class BigFrozenLakes extends AbstractFrozenLakes
 	@Override
 	protected void addLakes()
 	{
-		addFeature(
-				GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-				Biome.createDecoratedFeature(
-						PolarizingBiomeFeatures.BIG_LAKE,
-						new LakesConfig(Blocks.ICE.getDefaultState()),
-						PolarizingBiomePlacements.LAKE_AT_SURFACE,
-						new LakeChanceConfig(1)));
+		addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
+				PolarizingBiomeFeatures.BIG_LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.ICE.getDefaultState()))
+				.func_227228_a_(PolarizingBiomePlacements.LAKE_AT_SURFACE.func_227446_a_(new ChanceConfig(1))));
 	}
 }
