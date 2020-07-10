@@ -2,6 +2,8 @@ package bl4ckscor3.mod.polarizingbiomes.biome;
 
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomePlacements;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.BiomeAmbience;
+import net.minecraft.world.biome.MoodSoundAmbience;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -20,8 +22,12 @@ public class FrozenLakes extends AbstractFrozenLakes
 				.scale(0.15F)
 				.temperature(-2.0F)
 				.downfall(0.5F)
-				.waterColor(0x3F76E4)
-				.waterFogColor(0x050533)
+				.func_235097_a_(new BiomeAmbience.Builder() //ambience
+						.func_235239_a_(0xC0D8FF) //fogColor
+						.func_235246_b_(0x3F76E4) //waterColor
+						.func_235248_c_(0x050533) //waterFogColor
+						.func_235243_a_(MoodSoundAmbience.field_235027_b_) //moodSound, CAVE (or so)
+						.func_235238_a_()) //build
 				.parent(null));
 	}
 
@@ -29,7 +35,7 @@ public class FrozenLakes extends AbstractFrozenLakes
 	protected void addLakes()
 	{
 		addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-				Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.ICE.getDefaultState()))
-				.func_227228_a_(PolarizingBiomePlacements.LAKE_AT_SURFACE.func_227446_a_(new ChanceConfig(1))));
+				Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(Blocks.ICE.getDefaultState()))
+				.withPlacement(PolarizingBiomePlacements.LAKE_AT_SURFACE.configure(new ChanceConfig(1))));
 	}
 }

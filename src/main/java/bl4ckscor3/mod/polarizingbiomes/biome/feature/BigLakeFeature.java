@@ -1,35 +1,34 @@
 package bl4ckscor3.mod.polarizingbiomes.biome.feature;
 
 import java.util.Random;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.math.SectionPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 
 public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 {
 	private static final BlockState AIR = Blocks.CAVE_AIR.getDefaultState();
 
-	public BigLakeFeature(Function<Dynamic<?>, ? extends BlockStateFeatureConfig> configFactory)
+	public BigLakeFeature(Codec<BlockStateFeatureConfig> codec)
 	{
-		super(configFactory);
+		super(codec);
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BlockStateFeatureConfig config)
+	public boolean func_230362_a_(ISeedReader world, StructureManager structureManager, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config) //place
 	{
 		while(pos.getY() > 5 && world.isAirBlock(pos))
 		{
@@ -40,9 +39,9 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 			return false;
 		else
 		{
-			ChunkPos chunkpos = new ChunkPos(pos = pos.down(4));
+			pos = pos.down(4);
 
-			if(!world.getChunk(chunkpos.x, chunkpos.z, ChunkStatus.STRUCTURE_REFERENCES).getStructureReferences(Feature.VILLAGE.getStructureName()).isEmpty())
+			if(structureManager.func_235011_a_(SectionPos.from(pos), Structure.field_236381_q_).findAny().isPresent())
 				return false;
 			else
 			{
@@ -92,7 +91,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 								if(y >= 4 && material.isLiquid())
 									return false;
 
-								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.field_227270_a_)
+								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.state)
 									return false;
 							}
 						}
@@ -106,7 +105,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 						for(int y = 0; y < 16; ++y)
 						{
 							if(shouldPlace[(x * 32 + z) * 16 + y])
-								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.field_227270_a_, 2);
+								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.state, 2);
 						}
 					}
 				}
@@ -121,9 +120,9 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 							{
 								BlockPos blockPos = pos.add(x, y - 1, z);
 
-								if(func_227250_b_(world.getBlockState(blockPos).getBlock()) && world.func_226658_a_(LightType.SKY, pos.add(x, y, z)) > 0) //isDirt, getLightFor
+								if(isDirt(world.getBlockState(blockPos).getBlock()) && world.getLightFor(LightType.SKY, pos.add(x, y, z)) > 0)
 								{
-									Biome biome = world.func_226691_t_(blockPos); //getBiome
+									Biome biome = world.getBiome(blockPos);
 
 									if(biome.getSurfaceBuilderConfig().getTop().getBlock() == Blocks.MYCELIUM)
 										world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState(), 2);

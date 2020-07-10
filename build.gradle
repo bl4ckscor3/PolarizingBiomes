@@ -9,24 +9,17 @@ buildscript {
     }
 }
 
-plugins {
-	id "com.wynprice.cursemaven" version "2.1.1"
-}
-
-import groovy.json.JsonOutput
-import groovy.json.JsonSlurper
-
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.15.1-v1.0'
+version = '1.16.1-v1.0'
 group = 'bl4ckscor3.mod.polarizingbiomes'
 archivesBaseName = 'polarizingbiomes'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20191217-1.14.3'
+    mappings channel: 'snapshot', version: '20200514-1.16'
 	
     runs {
         client {
@@ -53,11 +46,16 @@ minecraft {
     }
 }
 
+repositories {
+    maven {
+        url "https://www.cursemaven.com"
+    }
+}
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.1-30.0.14'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.38'
 	
-	compile "curse.maven:snow-under-trees:2844915"
+	implementation fg.deobf("curse.maven:snow-under-trees:2844915")
 }
 
 jar {

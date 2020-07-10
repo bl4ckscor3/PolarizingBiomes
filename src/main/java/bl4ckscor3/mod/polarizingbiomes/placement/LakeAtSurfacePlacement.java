@@ -1,28 +1,26 @@
 package bl4ckscor3.mod.polarizingbiomes.placement;
 
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class LakeAtSurface extends Placement<ChanceConfig>
+public class LakeAtSurfacePlacement extends Placement<ChanceConfig>
 {
-	public LakeAtSurface(Function<Dynamic<?>, ? extends ChanceConfig> configFactory)
+	public LakeAtSurfacePlacement(Codec<ChanceConfig> codec)
 	{
-		super(configFactory);
+		super(codec);
 	}
 
 	@Override
-	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, ChanceConfig config, BlockPos pos)
+	public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator generator, Random random, ChanceConfig config, BlockPos pos)
 	{
 		if (random.nextInt(config.chance) == 0)
 		{

@@ -8,10 +8,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftStructure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
 
@@ -21,15 +17,13 @@ public abstract class AbstractFrozenLakes extends Biome
 	{
 		super(biomeBuilder);
 
-		//addStructure
-		func_226711_a_(Feature.VILLAGE.func_225566_b_(new VillageConfig("village/snowy/town_centers", 6)));
-		func_226711_a_(Feature.IGLOO.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-		func_226711_a_(Feature.MINESHAFT.func_225566_b_(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
-		func_226711_a_(Feature.STRONGHOLD.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-		func_226711_a_(Feature.PILLAGER_OUTPOST.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
+		func_235063_a_(DefaultBiomeFeatures.field_235185_w_); //village
+		func_235063_a_(DefaultBiomeFeatures.field_235169_g_); //igloo
+		func_235063_a_(DefaultBiomeFeatures.field_235134_a_); //pillager outpost
+		func_235063_a_(DefaultBiomeFeatures.field_235187_y_); //ruined portal
 
+		DefaultBiomeFeatures.func_235196_b_(this); //mineshaft and stronghold
 		DefaultBiomeFeatures.addCarvers(this);
-		DefaultBiomeFeatures.addStructures(this);
 		DefaultBiomeFeatures.addMonsterRooms(this);
 		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addOres(this);
@@ -39,8 +33,8 @@ public abstract class AbstractFrozenLakes extends Biome
 		PolarizingBiomeFeatures.addSpruceTrees(this, 1, 0.1F, 0);
 		//oak trees
 		addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226739_a_)
-				.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
+				Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG)
+				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addGrass(this);
@@ -62,13 +56,13 @@ public abstract class AbstractFrozenLakes extends Biome
 	}
 
 	@Override
-	public int func_225528_a_(double d1, double d2) //getGrassColor
+	public int getGrassColor(double d1, double d2)
 	{
 		return 0xFEFEFE;
 	}
 
 	@Override
-	public int func_225527_a_() //getFoliageColor
+	public int getFoliageColor()
 	{
 		return 0xFEFEFE;
 	}
