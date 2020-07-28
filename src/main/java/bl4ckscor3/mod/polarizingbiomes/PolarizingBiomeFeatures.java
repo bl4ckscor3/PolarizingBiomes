@@ -30,7 +30,7 @@ public class PolarizingBiomeFeatures
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
 			new BlobFoliagePlacer(2, 0, 0, 0, 1),
 			new StraightTrunkPlacer(12, 15, 3),
-			new TwoLayerFeature(2, 0, 2)).func_236700_a_().build();
+			new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build();
 
 	@SubscribeEvent
 	public static void onRegisterFeature(RegistryEvent.Register<Feature<?>> event)

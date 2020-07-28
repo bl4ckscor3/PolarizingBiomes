@@ -17,10 +17,10 @@ public abstract class AbstractFrozenLakes extends Biome
 	{
 		super(biomeBuilder);
 
-		func_235063_a_(DefaultBiomeFeatures.field_235185_w_); //village
-		func_235063_a_(DefaultBiomeFeatures.field_235169_g_); //igloo
-		func_235063_a_(DefaultBiomeFeatures.field_235134_a_); //pillager outpost
-		func_235063_a_(DefaultBiomeFeatures.field_235187_y_); //ruined portal
+		func_235063_a_(DefaultBiomeFeatures.VILLAGE_SNOWY);
+		func_235063_a_(DefaultBiomeFeatures.IGLOO);
+		func_235063_a_(DefaultBiomeFeatures.PILLAGER_OUTPOST);
+		func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL);
 
 		DefaultBiomeFeatures.func_235196_b_(this); //mineshaft and stronghold
 		DefaultBiomeFeatures.addCarvers(this);

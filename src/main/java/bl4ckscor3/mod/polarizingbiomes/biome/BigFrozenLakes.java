@@ -23,11 +23,11 @@ public class BigFrozenLakes extends AbstractFrozenLakes
 				.temperature(-2.0F)
 				.downfall(0.5F)
 				.func_235097_a_(new BiomeAmbience.Builder() //ambience
-						.func_235239_a_(0xC0D8FF) //fogColor
-						.func_235246_b_(0x3F76E4) //waterColor
-						.func_235248_c_(0x050533) //waterFogColor
-						.func_235243_a_(MoodSoundAmbience.field_235027_b_) //moodSound, CAVE (or so)
-						.func_235238_a_()) //build
+						.setFogColor(0xC0D8FF)
+						.setWaterColor(0x3F76E4)
+						.setWaterFogColor(0x050533)
+						.setMoodSound(MoodSoundAmbience.field_235027_b_) //CAVE (or so)
+						.build())
 				.parent(null));
 	}
 
