@@ -1,6 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
 import bl4ckscor3.mod.polarizingbiomes.biome.feature.BigLakeFeature;
+import bl4ckscor3.mod.polarizingbiomes.foliageplacer.SlimTreeFoliagePlacer;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
@@ -10,7 +11,6 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TwoLayerFeature;
-import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
@@ -28,7 +28,7 @@ public class PolarizingBiomeFeatures
 	public static final BaseTreeFeatureConfig SLIM_TREE_CONFIG = new BaseTreeFeatureConfig.Builder(
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-			new BlobFoliagePlacer(2, 0, 0, 0, 1),
+			new SlimTreeFoliagePlacer(2, 0, 0, 0, 1),
 			new StraightTrunkPlacer(12, 15, 3),
 			new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build();
 
