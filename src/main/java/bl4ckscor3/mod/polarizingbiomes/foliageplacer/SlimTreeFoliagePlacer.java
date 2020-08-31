@@ -3,7 +3,7 @@ package bl4ckscor3.mod.polarizingbiomes.foliageplacer;
 import java.util.Random;
 import java.util.Set;
 
-import com.mojang.datafixers.Products.P5;
+import com.mojang.datafixers.Products.P3;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mojang.serialization.codecs.RecordCodecBuilder.Instance;
@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
 
@@ -23,16 +24,16 @@ public class SlimTreeFoliagePlacer extends FoliagePlacer
 	public static final Codec<SlimTreeFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> func_236740_a_(instance).apply(instance, SlimTreeFoliagePlacer::new));
 	protected final int height;
 
-	public SlimTreeFoliagePlacer(int p_i232028_1_, int p_i232028_2_, int p_i232028_3_, int p_i232028_4_, int p_i232028_5_)
+	public SlimTreeFoliagePlacer(FeatureSpread fs1, FeatureSpread fs2, int height)
 	{
-		super(p_i232028_1_, p_i232028_2_, p_i232028_3_, p_i232028_4_);
+		super(fs1, fs2);
 
-		height = p_i232028_5_;
+		this.height = height;
 	}
 
-	protected static <P extends SlimTreeFoliagePlacer> P5<Mu<P>,Integer,Integer,Integer,Integer,Integer> func_236740_a_(Instance<P> instance)
+	protected static <P extends SlimTreeFoliagePlacer> P3<Mu<P>,FeatureSpread,FeatureSpread,Integer> func_236740_a_(Instance<P> instance)
 	{
-		return func_236756_b_(instance).and(Codec.INT.fieldOf("height").forGetter(o -> o.height));
+		return func_242830_b(instance).and(Codec.INT.fieldOf("height").forGetter(o -> o.height));
 	}
 
 	@Override

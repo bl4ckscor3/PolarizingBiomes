@@ -16,7 +16,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureManager;
 
 public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 {
@@ -28,7 +27,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean func_230362_a_(ISeedReader world, StructureManager structureManager, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config) //place
+	public boolean func_241855_a(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config) //place
 	{
 		while(pos.getY() > 5 && world.isAirBlock(pos))
 		{
@@ -41,7 +40,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 		{
 			pos = pos.down(4);
 
-			if(structureManager.func_235011_a_(SectionPos.from(pos), Structure.field_236381_q_).findAny().isPresent())
+			if(world.func_241827_a(SectionPos.from(pos), Structure.field_236381_q_).findAny().isPresent())
 				return false;
 			else
 			{
@@ -124,7 +123,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 								{
 									Biome biome = world.getBiome(blockPos);
 
-									if(biome.getSurfaceBuilderConfig().getTop().getBlock() == Blocks.MYCELIUM)
+									if(biome.func_242440_e().func_242502_e().getTop().isIn(Blocks.MYCELIUM))
 										world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState(), 2);
 									else
 										world.setBlockState(blockPos, Blocks.GRASS_BLOCK.getDefaultState(), 2);

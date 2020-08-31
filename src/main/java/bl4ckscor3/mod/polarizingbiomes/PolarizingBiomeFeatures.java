@@ -10,6 +10,7 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureSpread;
 import net.minecraft.world.gen.feature.TwoLayerFeature;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.Placement;
@@ -28,7 +29,7 @@ public class PolarizingBiomeFeatures
 	public static final BaseTreeFeatureConfig SLIM_TREE_CONFIG = new BaseTreeFeatureConfig.Builder(
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-			new SlimTreeFoliagePlacer(2, 0, 0, 0, 1),
+			new SlimTreeFoliagePlacer(FeatureSpread.func_242253_a(2, 0), FeatureSpread.func_242253_a(0, 0), 1),
 			new StraightTrunkPlacer(12, 15, 3),
 			new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build();
 
