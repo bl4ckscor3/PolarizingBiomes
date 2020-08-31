@@ -24,7 +24,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomeFeatures
 {
-	public static final Feature<BlockStateFeatureConfig> BIG_LAKE = (Feature<BlockStateFeatureConfig>)new BigLakeFeature(BlockStateFeatureConfig::func_227271_a_).setRegistryName("big_lake"); //deserialize
+	public static final Feature<BlockStateFeatureConfig> BIG_LAKE = (Feature<BlockStateFeatureConfig>)new BigLakeFeature(BlockStateFeatureConfig::deserialize).setRegistryName("big_lake"); //deserialize
 	public static final Feature<TreeFeatureConfig> SLIM_TREE = (Feature<TreeFeatureConfig>)new SlimTreeFeature(TreeFeatureConfig::func_227338_a_).setRegistryName("slim_tree");
 
 	@SubscribeEvent
@@ -37,20 +37,20 @@ public class PolarizingBiomeFeatures
 	public static void addSlimTaigaTrees(Biome biome)
 	{
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				SLIM_TREE.func_225566_b_(
+				SLIM_TREE.withConfiguration(
 						new TreeFeatureConfig.Builder(
 								new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
 								new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
 								new BlobFoliagePlacer(0, 0))
 						.setSapling((IPlantable)Blocks.SPRUCE_SAPLING)
-						.func_225568_b_())
-				.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(20, 0.1F, 1))));
+						.build())
+				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(20, 0.1F, 1))));
 	}
 
 	public static void addSpruceTrees(Biome biome, int count, float extraChance, int extraCount)
 	{
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226810_e_)
-				.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(count, extraChance, extraCount))));
+				Feature.NORMAL_TREE.withConfiguration(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG)
+				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, extraCount))));
 	}
 }

@@ -29,7 +29,7 @@ public class FrozenLakes extends AbstractFrozenLakes
 	protected void addLakes()
 	{
 		addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-				Feature.LAKE.func_225566_b_(new BlockStateFeatureConfig(Blocks.ICE.getDefaultState()))
-				.func_227228_a_(PolarizingBiomePlacements.LAKE_AT_SURFACE.func_227446_a_(new ChanceConfig(1))));
+				Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(Blocks.ICE.getDefaultState()))
+				.withPlacement(PolarizingBiomePlacements.LAKE_AT_SURFACE.configure(new ChanceConfig(1))));
 	}
 }

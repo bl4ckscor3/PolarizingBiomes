@@ -92,7 +92,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 								if(y >= 4 && material.isLiquid())
 									return false;
 
-								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.field_227270_a_)
+								if(y < 4 && !material.isSolid() && world.getBlockState(pos.add(x, y, z)) != config.state)
 									return false;
 							}
 						}
@@ -106,7 +106,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 						for(int y = 0; y < 16; ++y)
 						{
 							if(shouldPlace[(x * 32 + z) * 16 + y])
-								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.field_227270_a_, 2);
+								world.setBlockState(pos.add(x, y, z), y >= 4 ? AIR : config.state, 2);
 						}
 					}
 				}
@@ -121,9 +121,9 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 							{
 								BlockPos blockPos = pos.add(x, y - 1, z);
 
-								if(func_227250_b_(world.getBlockState(blockPos).getBlock()) && world.func_226658_a_(LightType.SKY, pos.add(x, y, z)) > 0) //isDirt, getLightFor
+								if(isDirt(world.getBlockState(blockPos).getBlock()) && world.getLightFor(LightType.SKY, pos.add(x, y, z)) > 0)
 								{
-									Biome biome = world.func_226691_t_(blockPos); //getBiome
+									Biome biome = world.getBiome(blockPos);
 
 									if(biome.getSurfaceBuilderConfig().getTop().getBlock() == Blocks.MYCELIUM)
 										world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState(), 2);

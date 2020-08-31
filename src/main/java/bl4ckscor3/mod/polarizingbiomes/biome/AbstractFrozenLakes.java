@@ -21,12 +21,11 @@ public abstract class AbstractFrozenLakes extends Biome
 	{
 		super(biomeBuilder);
 
-		//addStructure
-		func_226711_a_(Feature.VILLAGE.func_225566_b_(new VillageConfig("village/snowy/town_centers", 6)));
-		func_226711_a_(Feature.IGLOO.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-		func_226711_a_(Feature.MINESHAFT.func_225566_b_(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
-		func_226711_a_(Feature.STRONGHOLD.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-		func_226711_a_(Feature.PILLAGER_OUTPOST.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
+		addStructure(Feature.VILLAGE.withConfiguration(new VillageConfig("village/snowy/town_centers", 6)));
+		addStructure(Feature.IGLOO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+		addStructure(Feature.MINESHAFT.withConfiguration(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
+		addStructure(Feature.STRONGHOLD.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+		addStructure(Feature.PILLAGER_OUTPOST.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
 
 		DefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addStructures(this);
@@ -39,8 +38,8 @@ public abstract class AbstractFrozenLakes extends Biome
 		PolarizingBiomeFeatures.addSpruceTrees(this, 1, 0.1F, 0);
 		//oak trees
 		addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.NORMAL_TREE.func_225566_b_(DefaultBiomeFeatures.field_226739_a_)
-				.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
+				Feature.NORMAL_TREE.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG)
+				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addGrass(this);
@@ -62,13 +61,13 @@ public abstract class AbstractFrozenLakes extends Biome
 	}
 
 	@Override
-	public int func_225528_a_(double d1, double d2) //getGrassColor
+	public int getGrassColor(double d1, double d2)
 	{
 		return 0xFEFEFE;
 	}
 
 	@Override
-	public int func_225527_a_() //getFoliageColor
+	public int getFoliageColor()
 	{
 		return 0xFEFEFE;
 	}

@@ -19,14 +19,14 @@ import groovy.json.JsonSlurper
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.15.1-v1.0'
+version = '1.15.2-v1.0.1'
 group = 'bl4ckscor3.mod.polarizingbiomes'
 archivesBaseName = 'polarizingbiomes'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20191217-1.14.3'
+    mappings channel: 'snapshot', version: '20200515-1.15.1'
 	
     runs {
         client {
@@ -55,7 +55,7 @@ minecraft {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.1-30.0.14'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
 	
 	compile "curse.maven:snow-under-trees:2844915"
 }
@@ -64,9 +64,9 @@ jar {
     manifest {
         attributes(["Specification-Title": "Polarizing Biomes",
                     "Specification-Vendor": "bl4ckscor3",
-                    "Specification-Version": "v1.0",
+                    "Specification-Version": "v1.0.1",
                     "Implementation-Title": "Polarizing Biomes",
-                    "Implementation-Version": "v1.0",
+                    "Implementation-Version": "v1.0.1",
                     "Implementation-Vendor" :"bl4ckscor3",
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
     }

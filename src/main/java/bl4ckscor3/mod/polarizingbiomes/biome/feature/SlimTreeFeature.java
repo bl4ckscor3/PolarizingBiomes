@@ -22,7 +22,7 @@ public class SlimTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 	}
 
 	@Override
-	protected boolean func_225557_a_(IWorldGenerationReader world, Random random, BlockPos originalPos, Set<BlockPos> changedBlocks, Set<BlockPos> p_225557_5_, MutableBoundingBox bounds, TreeFeatureConfig config)
+	protected boolean place(IWorldGenerationReader world, Random random, BlockPos originalPos, Set<BlockPos> changedBlocks, Set<BlockPos> p_225557_5_, MutableBoundingBox bounds, TreeFeatureConfig config)
 	{
 		int treeHeight = randomRange(random, 12, 18);
 
