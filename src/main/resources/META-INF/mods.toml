@@ -4,7 +4,7 @@ license="GNU GPL v3.0 - https://github.com/bl4ckscor3/PolarizingBiomes/blob/1.16
 
 [[mods]] #mandatory
 	modId="polarizingbiomes" #mandatory
-	version="v1.0" #mandatory
+	version="v1.0.1" #mandatory
 	displayName="Polarizing Biomes" #mandatory
 	description='''Adds a couple winter-themed biomes.''' #mandatory
 	issueTrackerURL="https://github.com/bl4ckscor3/PolarizingBiomes"
