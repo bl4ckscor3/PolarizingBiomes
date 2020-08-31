@@ -3,7 +3,7 @@ loaderVersion="[28,)" #mandatory
 
 [[mods]] #mandatory
 	modId="polarizingbiomes" #mandatory
-	version="v1.0" #mandatory
+	version="v1.0.1" #mandatory
 	displayName="Polarizing Biomes" #mandatory
 	description='''Adds a couple winter-themed biomes.''' #mandatory
 	issueTrackerURL="https://github.com/bl4ckscor3/PolarizingBiomes"
