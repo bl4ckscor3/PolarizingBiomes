@@ -19,7 +19,7 @@ public class LakeAtSurfacePlacement extends Placement<ChanceConfig>
 	}
 
 	@Override
-	public Stream<BlockPos> func_241857_a(WorldDecoratingHelper wdh, Random random, ChanceConfig config, BlockPos pos)
+	public Stream<BlockPos> getPositions(WorldDecoratingHelper wdh, Random random, ChanceConfig config, BlockPos pos)
 	{
 		if (random.nextInt(config.chance) == 0)
 		{

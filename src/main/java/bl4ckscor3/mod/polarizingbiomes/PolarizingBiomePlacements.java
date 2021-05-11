@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomePlacements
 {
-	public static final Placement<ChanceConfig> LAKE_AT_SURFACE = (Placement<ChanceConfig>)new LakeAtSurfacePlacement(ChanceConfig.field_236950_a_).setRegistryName("lake_at_surface");
+	public static final Placement<ChanceConfig> LAKE_AT_SURFACE = (Placement<ChanceConfig>)new LakeAtSurfacePlacement(ChanceConfig.CODEC).setRegistryName("lake_at_surface");
 
 	@SubscribeEvent
 	public static void onRegisterFeature(RegistryEvent.Register<Placement<?>> event)

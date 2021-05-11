@@ -42,14 +42,14 @@ public class PolarizingBiomeFeatures
 	public static void addSlimTaigaTrees(Biome biome)
 	{
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.field_236291_c_.withConfiguration(SLIM_TREE_CONFIG)
+				Feature.TREE.withConfiguration(SLIM_TREE_CONFIG)
 				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(20, 0.1F, 1))));
 	}
 
 	public static void addSpruceTrees(Biome biome, int count, float extraChance, int extraCount)
 	{
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-				Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG)
+				Feature.TREE.withConfiguration(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG)
 				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, extraCount))));
 	}
 }

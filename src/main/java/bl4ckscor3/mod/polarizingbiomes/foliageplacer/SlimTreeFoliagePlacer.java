@@ -47,7 +47,7 @@ public class SlimTreeFoliagePlacer extends FoliagePlacer
 	{
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		pos.func_239621_a_(p_230372_5_.func_236763_a_(), 0, p_230372_7_ - 3, 0);
+		pos.setAndOffset(p_230372_5_.func_236763_a_(), 0, p_230372_7_ - 3, 0);
 		setLeaf(changedBlocks, world, pos.move(Direction.UP), featureConfig, bounds, random);
 		setLeaf(changedBlocks, world, pos.move(Direction.DOWN).move(Direction.NORTH), featureConfig, bounds, random);
 		setLeaf(changedBlocks, world, pos.move(Direction.DOWN), featureConfig, bounds, random);
