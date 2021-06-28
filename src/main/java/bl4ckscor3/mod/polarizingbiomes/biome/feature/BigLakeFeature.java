@@ -123,7 +123,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 								{
 									Biome biome = world.getBiome(blockPos);
 
-									if(biome.getGenerationSettings().getSurfaceBuilderConfig().getTop().isIn(Blocks.MYCELIUM))
+									if(biome.getGenerationSettings().getSurfaceBuilderConfig().getTop().matchesBlock(Blocks.MYCELIUM))
 										world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState(), 2);
 									else
 										world.setBlockState(blockPos, Blocks.GRASS_BLOCK.getDefaultState(), 2);

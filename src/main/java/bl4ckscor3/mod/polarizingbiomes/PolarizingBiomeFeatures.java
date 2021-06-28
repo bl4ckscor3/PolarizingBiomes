@@ -25,11 +25,11 @@ import net.minecraftforge.registries.ObjectHolder;
 public class PolarizingBiomeFeatures
 {
 	@ObjectHolder(PolarizingBiomes.MODID + ":big_lake")
-	public static final Feature<BlockStateFeatureConfig> BIG_LAKE = (Feature<BlockStateFeatureConfig>)new BigLakeFeature(BlockStateFeatureConfig.field_236455_a_).setRegistryName("big_lake");
+	public static final Feature<BlockStateFeatureConfig> BIG_LAKE = (Feature<BlockStateFeatureConfig>)new BigLakeFeature(BlockStateFeatureConfig.CODEC).setRegistryName("big_lake");
 	public static final BaseTreeFeatureConfig SLIM_TREE_CONFIG = new BaseTreeFeatureConfig.Builder(
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
 			new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-			new SlimTreeFoliagePlacer(FeatureSpread.func_242253_a(2, 0), FeatureSpread.func_242253_a(0, 0), 1),
+			new SlimTreeFoliagePlacer(FeatureSpread.create(2, 0), FeatureSpread.create(0, 0), 1),
 			new StraightTrunkPlacer(12, 15, 3),
 			new TwoLayerFeature(2, 0, 2)).setIgnoreVines().build();
 
