@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.ObjectHolder;
 
 @EventBusSubscriber(modid=PolarizingBiomes.MODID, bus=Bus.MOD)
+@ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomeFoliagePlacerTypes
 {
-	@ObjectHolder(PolarizingBiomes.MODID + ":slim_tree")
 	public static final FoliagePlacerType<SlimTreeFoliagePlacer> SLIM_TREE = null;
 
 	@SubscribeEvent

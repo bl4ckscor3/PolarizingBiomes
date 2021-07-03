@@ -27,7 +27,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config) //place
+	public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config)
 	{
 		while(pos.getY() > 5 && world.isAirBlock(pos))
 		{
