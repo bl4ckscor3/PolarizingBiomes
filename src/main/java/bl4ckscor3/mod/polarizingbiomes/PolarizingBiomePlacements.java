@@ -1,8 +1,8 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
 import bl4ckscor3.mod.polarizingbiomes.placement.LakeAtSurfacePlacement;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.level.levelgen.placement.ChanceDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -13,10 +13,10 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(PolarizingBiomes.MODID)
 public class PolarizingBiomePlacements
 {
-	public static final Placement<ChanceConfig> LAKE_AT_SURFACE = (Placement<ChanceConfig>)new LakeAtSurfacePlacement(ChanceConfig.CODEC).setRegistryName("lake_at_surface");
+	public static final FeatureDecorator<ChanceDecoratorConfiguration> LAKE_AT_SURFACE = (FeatureDecorator<ChanceDecoratorConfiguration>)new LakeAtSurfacePlacement(ChanceDecoratorConfiguration.CODEC).setRegistryName("lake_at_surface");
 
 	@SubscribeEvent
-	public static void onRegisterFeature(RegistryEvent.Register<Placement<?>> event)
+	public static void onRegisterFeature(RegistryEvent.Register<FeatureDecorator<?>> event)
 	{
 		event.getRegistry().register(LAKE_AT_SURFACE);
 	}

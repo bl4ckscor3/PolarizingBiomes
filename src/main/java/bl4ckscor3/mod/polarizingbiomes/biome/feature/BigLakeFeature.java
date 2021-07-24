@@ -4,30 +4,30 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.SectionPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.LightType;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 
-public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
+public class BigLakeFeature extends Feature<BlockStateConfiguration>
 {
 	private static final BlockState AIR = Blocks.CAVE_AIR.defaultBlockState();
 
-	public BigLakeFeature(Codec<BlockStateFeatureConfig> codec)
+	public BigLakeFeature(Codec<BlockStateConfiguration> codec)
 	{
 		super(codec);
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateFeatureConfig config)
+	public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateConfiguration config)
 	{
 		while(pos.getY() > 5 && world.isEmptyBlock(pos))
 		{
@@ -40,7 +40,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 		{
 			pos = pos.below(4);
 
-			if(world.startsForFeature(SectionPos.of(pos), Structure.VILLAGE).findAny().isPresent())
+			if(world.startsForFeature(SectionPos.of(pos), StructureFeature.VILLAGE).findAny().isPresent())
 				return false;
 			else
 			{
@@ -119,7 +119,7 @@ public class BigLakeFeature extends Feature<BlockStateFeatureConfig>
 							{
 								BlockPos blockPos = pos.offset(x, y - 1, z);
 
-								if(isDirt(world.getBlockState(blockPos).getBlock()) && world.getBrightness(LightType.SKY, pos.offset(x, y, z)) > 0)
+								if(isDirt(world.getBlockState(blockPos).getBlock()) && world.getBrightness(LightLayer.SKY, pos.offset(x, y, z)) > 0)
 								{
 									Biome biome = world.getBiome(blockPos);
 

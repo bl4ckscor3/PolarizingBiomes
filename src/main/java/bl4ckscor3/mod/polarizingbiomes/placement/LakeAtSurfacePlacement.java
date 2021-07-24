@@ -5,27 +5,27 @@ import java.util.stream.Stream;
 
 import com.mojang.serialization.Codec;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.WorldDecoratingHelper;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.placement.DecorationContext;
+import net.minecraft.world.level.levelgen.placement.ChanceDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
-public class LakeAtSurfacePlacement extends Placement<ChanceConfig>
+public class LakeAtSurfacePlacement extends FeatureDecorator<ChanceDecoratorConfiguration>
 {
-	public LakeAtSurfacePlacement(Codec<ChanceConfig> codec)
+	public LakeAtSurfacePlacement(Codec<ChanceDecoratorConfiguration> codec)
 	{
 		super(codec);
 	}
 
 	@Override
-	public Stream<BlockPos> getPositions(WorldDecoratingHelper wdh, Random random, ChanceConfig config, BlockPos pos)
+	public Stream<BlockPos> getPositions(DecorationContext wdh, Random random, ChanceDecoratorConfiguration config, BlockPos pos)
 	{
 		if (random.nextInt(config.chance) == 0)
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int y = wdh.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX() + x, pos.getZ() + z);
+			int y = wdh.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX() + x, pos.getZ() + z);
 
 			return Stream.of(pos.offset(x, y, z));
 		}

@@ -1,7 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes;
 
 import bl4ckscor3.mod.polarizingbiomes.foliageplacer.SlimTreeFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FoliagePlacerType;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
