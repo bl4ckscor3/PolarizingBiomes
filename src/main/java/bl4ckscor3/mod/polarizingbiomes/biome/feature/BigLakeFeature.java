@@ -4,18 +4,18 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
-import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
+import net.minecraft.world.level.material.Material;
 
 public class BigLakeFeature extends Feature<BlockStateConfiguration>
 {
@@ -27,9 +27,14 @@ public class BigLakeFeature extends Feature<BlockStateConfiguration>
 	}
 
 	@Override //slightly modified vanilla code
-	public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, BlockStateConfiguration config)
+	public boolean place(FeaturePlaceContext<BlockStateConfiguration> ctx)
 	{
-		while(pos.getY() > 5 && world.isEmptyBlock(pos))
+		BlockPos pos = ctx.origin();
+		WorldGenLevel level = ctx.level();
+		Random rand = ctx.random();
+		BlockStateConfiguration config = ctx.config();
+
+		while(pos.getY() > 5 && level.isEmptyBlock(pos))
 		{
 			pos = pos.below();
 		}
@@ -40,7 +45,7 @@ public class BigLakeFeature extends Feature<BlockStateConfiguration>
 		{
 			pos = pos.below(4);
 
-			if(world.startsForFeature(SectionPos.of(pos), StructureFeature.VILLAGE).findAny().isPresent())
+			if(level.startsForFeature(SectionPos.of(pos), StructureFeature.VILLAGE).findAny().isPresent())
 				return false;
 			else
 			{
@@ -85,12 +90,12 @@ public class BigLakeFeature extends Feature<BlockStateConfiguration>
 
 							if(flag)
 							{
-								Material material = world.getBlockState(pos.offset(x, y, z)).getMaterial();
+								Material material = level.getBlockState(pos.offset(x, y, z)).getMaterial();
 
 								if(y >= 4 && material.isLiquid())
 									return false;
 
-								if(y < 4 && !material.isSolid() && world.getBlockState(pos.offset(x, y, z)) != config.state)
+								if(y < 4 && !material.isSolid() && level.getBlockState(pos.offset(x, y, z)) != config.state)
 									return false;
 							}
 						}
@@ -104,7 +109,7 @@ public class BigLakeFeature extends Feature<BlockStateConfiguration>
 						for(int y = 0; y < 16; ++y)
 						{
 							if(shouldPlace[(x * 32 + z) * 16 + y])
-								world.setBlock(pos.offset(x, y, z), y >= 4 ? AIR : config.state, 2);
+								level.setBlock(pos.offset(x, y, z), y >= 4 ? AIR : config.state, 2);
 						}
 					}
 				}
@@ -119,14 +124,14 @@ public class BigLakeFeature extends Feature<BlockStateConfiguration>
 							{
 								BlockPos blockPos = pos.offset(x, y - 1, z);
 
-								if(isDirt(world.getBlockState(blockPos).getBlock()) && world.getBrightness(LightLayer.SKY, pos.offset(x, y, z)) > 0)
+								if(isDirt(level.getBlockState(blockPos)) && level.getBrightness(LightLayer.SKY, pos.offset(x, y, z)) > 0)
 								{
-									Biome biome = world.getBiome(blockPos);
+									Biome biome = level.getBiome(blockPos);
 
 									if(biome.getGenerationSettings().getSurfaceBuilderConfig().getTopMaterial().is(Blocks.MYCELIUM))
-										world.setBlock(blockPos, Blocks.MYCELIUM.defaultBlockState(), 2);
+										level.setBlock(blockPos, Blocks.MYCELIUM.defaultBlockState(), 2);
 									else
-										world.setBlock(blockPos, Blocks.GRASS_BLOCK.defaultBlockState(), 2);
+										level.setBlock(blockPos, Blocks.GRASS_BLOCK.defaultBlockState(), 2);
 								}
 							}
 						}

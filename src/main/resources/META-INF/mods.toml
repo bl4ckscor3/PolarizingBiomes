@@ -28,6 +28,6 @@ license="GNU GPL v3.0 - https://github.com/bl4ckscor3/PolarizingBiomes/blob/1.17
 [[dependencies.polarizingbiomes]]
     modId="snowundertrees"
     mandatory=true
-    versionRange="[v1,)"
+    versionRange="[1,)"
     ordering="NONE"
     side="BOTH"

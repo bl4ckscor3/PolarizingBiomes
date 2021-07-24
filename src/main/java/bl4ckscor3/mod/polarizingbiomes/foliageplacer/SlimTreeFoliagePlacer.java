@@ -1,7 +1,7 @@
 package bl4ckscor3.mod.polarizingbiomes.foliageplacer;
 
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 import com.mojang.datafixers.Products.P3;
 import com.mojang.serialization.Codec;
@@ -10,30 +10,28 @@ import com.mojang.serialization.codecs.RecordCodecBuilder.Instance;
 import com.mojang.serialization.codecs.RecordCodecBuilder.Mu;
 
 import bl4ckscor3.mod.polarizingbiomes.PolarizingBiomeFoliagePlacerTypes;
-import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.LevelSimulatedRW;
+import net.minecraft.core.Direction;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.util.UniformInt;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
-
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageAttachment;
 
 public class SlimTreeFoliagePlacer extends FoliagePlacer
 {
 	public static final Codec<SlimTreeFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> blobParts(instance).apply(instance, SlimTreeFoliagePlacer::new));
 	protected final int height;
 
-	public SlimTreeFoliagePlacer(UniformInt fs1, UniformInt fs2, int height)
+	public SlimTreeFoliagePlacer(IntProvider fs1, IntProvider fs2, int height)
 	{
 		super(fs1, fs2);
 
 		this.height = height;
 	}
 
-	protected static <P extends SlimTreeFoliagePlacer> P3<Mu<P>,UniformInt,UniformInt,Integer> blobParts(Instance<P> instance)
+	protected static <P extends SlimTreeFoliagePlacer> P3<Mu<P>,IntProvider,IntProvider,Integer> blobParts(Instance<P> instance)
 	{
 		return foliagePlacerParts(instance).and(Codec.INT.fieldOf("height").forGetter(o -> o.height));
 	}
@@ -45,37 +43,39 @@ public class SlimTreeFoliagePlacer extends FoliagePlacer
 	}
 
 	@Override
-	protected void createFoliage(LevelSimulatedRW world, Random random, TreeConfiguration featureConfig, int p_230372_4_, FoliageAttachment p_230372_5_, int p_230372_6_, int p_230372_7_, Set<BlockPos> changedBlocks, int p_230372_9_, BoundingBox bounds)
+	protected void createFoliage(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> placer, Random random, TreeConfiguration featureConfig, int p_161364_, FoliageAttachment foliageAttachment, int p_161366_, int p_161367_, int p_161368_)
 	{
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
-		pos.setWithOffset(p_230372_5_.foliagePos(), 0, p_230372_7_ - 3, 0);
-		setLeaf(changedBlocks, world, pos.move(Direction.UP), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.DOWN).move(Direction.NORTH), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.DOWN), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.UP).move(Direction.SOUTH).move(Direction.EAST), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.DOWN), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.UP).move(Direction.WEST).move(Direction.SOUTH), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.DOWN), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.UP).move(Direction.NORTH).move(Direction.WEST), featureConfig, bounds, random);
-		setLeaf(changedBlocks, world, pos.move(Direction.DOWN), featureConfig, bounds, random);
-	}
-
-	private void setLeaf(Set<BlockPos> changedBlocks, LevelSimulatedRW world, BlockPos.MutableBlockPos pos, TreeConfiguration featureConfig, BoundingBox bounds, Random random)
-	{
-		world.setBlock(pos, featureConfig.leavesProvider.getState(random, pos), 19);
-		bounds.expand(new BoundingBox(pos, pos));
-		changedBlocks.add(pos.immutable());
+		pos.setWithOffset(foliageAttachment.pos(), 0, p_161367_ - 3, 0);
+		pos.move(Direction.UP);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.DOWN).move(Direction.NORTH);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.DOWN);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.UP).move(Direction.SOUTH).move(Direction.EAST);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.DOWN);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.UP).move(Direction.WEST).move(Direction.SOUTH);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.DOWN);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.UP).move(Direction.NORTH).move(Direction.WEST);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
+		pos.move(Direction.DOWN);
+		tryPlaceLeaf(world, placer, random, featureConfig, pos);
 	}
 
 	@Override
-	public int foliageHeight(Random random, int p_230374_2_, TreeConfiguration featureConfig)
+	public int foliageHeight(Random random, int p_68424_, TreeConfiguration treeConfiguration)
 	{
 		return height;
 	}
 
 	@Override
-	protected boolean shouldSkipLocation(Random random, int p_230373_2_, int p_230373_3_, int p_230373_4_, int p_230373_5_, boolean p_230373_6_)
+	protected boolean shouldSkipLocation(Random p_68416_, int p_68417_, int p_68418_, int p_68419_, int p_68420_, boolean p_68421_)
 	{
 		return true;
 	}

@@ -7,8 +7,8 @@ import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.placement.DecorationContext;
 import net.minecraft.world.level.levelgen.placement.ChanceDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.DecorationContext;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
 public class LakeAtSurfacePlacement extends FeatureDecorator<ChanceDecoratorConfiguration>
