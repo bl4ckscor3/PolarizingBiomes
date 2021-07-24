@@ -25,9 +25,9 @@ public class LakeAtSurfacePlacement extends Placement<ChanceConfig>
 		{
 			int x = random.nextInt(16);
 			int z = random.nextInt(16);
-			int y = wdh.func_242893_a(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX() + x, pos.getZ() + z);
+			int y = wdh.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.getX() + x, pos.getZ() + z);
 
-			return Stream.of(pos.add(x, y, z));
+			return Stream.of(pos.offset(x, y, z));
 		}
 		else
 			return Stream.empty();

@@ -48,7 +48,7 @@ public class PolarizingBiomes
 	public static RegistryObject<Biome> registerBiome(String name, Supplier<Biome> biome, Type... types)
 	{
 		ResourceLocation biomeLocation = new ResourceLocation(MODID, name);
-		RegistryKey<Biome> biomeKey = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, biomeLocation);
+		RegistryKey<Biome> biomeKey = RegistryKey.create(Registry.BIOME_REGISTRY, biomeLocation);
 
 		BiomeManager.addBiome(BiomeType.ICY, new BiomeEntry(biomeKey, 10));
 		BiomeDictionary.addTypes(biomeKey, types);
@@ -59,30 +59,30 @@ public class PolarizingBiomes
 	{
 		MobSpawnInfo.Builder spawnInfo = new MobSpawnInfo.Builder();
 		BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder()
-				.withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
-				.withStructure(StructureFeatures.IGLOO)
-				.withStructure(StructureFeatures.RUINED_PORTAL);
+				.surfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
+				.addStructureStart(StructureFeatures.IGLOO)
+				.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
 
 		withDefaultSettings(generationSettings);
-		generationSettings.withFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SPRUCE_TREES_DENSE);
-		generationSettings.withFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SLIM_SPRUCE_TREES);
-		DefaultBiomeFeatures.withSnowyBiomeMobs(spawnInfo);
+		generationSettings.addFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SPRUCE_TREES_DENSE);
+		generationSettings.addFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SLIM_SPRUCE_TREES);
+		DefaultBiomeFeatures.snowySpawns(spawnInfo);
 		return new Biome.Builder()
 				.precipitation(RainType.SNOW)
-				.category(Category.ICY)
+				.biomeCategory(Category.ICY)
 				.depth(0.2F)
 				.scale(0.18F)
 				.temperature(-0.5F)
 				.downfall(0.5F)
-				.setEffects(new BiomeAmbience.Builder()
-						.withSkyColor(0x7FA1FF)
-						.setFogColor(0xC0D8FF)
-						.setWaterColor(0x3F76E4)
-						.setWaterFogColor(0x050533)
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE)
+				.specialEffects(new BiomeAmbience.Builder()
+						.skyColor(0x7FA1FF)
+						.fogColor(0xC0D8FF)
+						.waterColor(0x3F76E4)
+						.waterFogColor(0x050533)
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
 						.build())
-				.withGenerationSettings(generationSettings.build())
-				.withMobSpawnSettings(spawnInfo.build())
+				.generationSettings(generationSettings.build())
+				.mobSpawnSettings(spawnInfo.build())
 				.build();
 	}
 
@@ -90,33 +90,33 @@ public class PolarizingBiomes
 	{
 		MobSpawnInfo.Builder spawnInfo = new MobSpawnInfo.Builder();
 		BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder()
-				.withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
-				.withStructure(StructureFeatures.IGLOO)
-				.withStructure(StructureFeatures.RUINED_PORTAL)
-				.withStructure(StructureFeatures.VILLAGE_SNOWY)
-				.withStructure(StructureFeatures.PILLAGER_OUTPOST);
+				.surfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
+				.addStructureStart(StructureFeatures.IGLOO)
+				.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD)
+				.addStructureStart(StructureFeatures.VILLAGE_SNOWY)
+				.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
 
 		withDefaultSettings(generationSettings);
-		DefaultBiomeFeatures.withMountainEdgeTrees(generationSettings);
-		DefaultBiomeFeatures.withSnowyBiomeMobs(spawnInfo);
+		DefaultBiomeFeatures.addMountainEdgeTrees(generationSettings);
+		DefaultBiomeFeatures.snowySpawns(spawnInfo);
 		return new Biome.Builder()
 				.precipitation(RainType.SNOW)
-				.category(Category.ICY)
+				.biomeCategory(Category.ICY)
 				.depth(0.2F)
 				.scale(0.06F)
 				.temperature(-2.0F)
 				.downfall(0.5F)
-				.setEffects(new BiomeAmbience.Builder()
-						.withSkyColor(0x7FA1FF)
-						.setFogColor(0xC0D8FF)
-						.setWaterColor(0x3F76E4)
-						.setWaterFogColor(0x050533)
-						.withFoliageColor(0xFEFEFE)
-						.withGrassColor(0xFEFEFE)
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE)
+				.specialEffects(new BiomeAmbience.Builder()
+						.skyColor(0x7FA1FF)
+						.fogColor(0xC0D8FF)
+						.waterColor(0x3F76E4)
+						.waterFogColor(0x050533)
+						.foliageColorOverride(0xFEFEFE)
+						.grassColorOverride(0xFEFEFE)
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
 						.build())
-				.withGenerationSettings(generationSettings.build())
-				.withMobSpawnSettings(spawnInfo.build())
+				.generationSettings(generationSettings.build())
+				.mobSpawnSettings(spawnInfo.build())
 				.build();
 	}
 
@@ -124,36 +124,36 @@ public class PolarizingBiomes
 	{
 		MobSpawnInfo.Builder spawnInfo = new MobSpawnInfo.Builder();
 		BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder()
-				.withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
-				.withStructure(StructureFeatures.IGLOO)
-				.withStructure(StructureFeatures.RUINED_PORTAL)
-				.withStructure(StructureFeatures.VILLAGE_SNOWY)
-				.withStructure(StructureFeatures.PILLAGER_OUTPOST);
+				.surfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
+				.addStructureStart(StructureFeatures.IGLOO)
+				.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD)
+				.addStructureStart(StructureFeatures.VILLAGE_SNOWY)
+				.addStructureStart(StructureFeatures.PILLAGER_OUTPOST);
 
 		withDefaultSettings(generationSettings);
-		generationSettings.withFeature(Decoration.LOCAL_MODIFICATIONS, lake.get());
-		generationSettings.withFeature(Decoration.LOCAL_MODIFICATIONS, lake.get());
-		generationSettings.withFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.OAK_TREES);
-		generationSettings.withFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SPRUCE_TREES_LAKES);
-		DefaultBiomeFeatures.withSnowyBiomeMobs(spawnInfo);
+		generationSettings.addFeature(Decoration.LOCAL_MODIFICATIONS, lake.get());
+		generationSettings.addFeature(Decoration.LOCAL_MODIFICATIONS, lake.get());
+		generationSettings.addFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.OAK_TREES);
+		generationSettings.addFeature(Decoration.VEGETAL_DECORATION, PolarizingBiomeFeatures.SPRUCE_TREES_LAKES);
+		DefaultBiomeFeatures.snowySpawns(spawnInfo);
 		return new Biome.Builder()
 				.precipitation(RainType.SNOW)
-				.category(Category.ICY)
+				.biomeCategory(Category.ICY)
 				.depth(0.2F)
 				.scale(0.15F)
 				.temperature(-2.0F)
 				.downfall(0.5F)
-				.setEffects(new BiomeAmbience.Builder()
-						.withSkyColor(0x7FA1FF)
-						.setFogColor(0xC0D8FF)
-						.setWaterColor(0x3F76E4)
-						.setWaterFogColor(0x050533)
-						.withFoliageColor(0xFEFEFE)
-						.withGrassColor(0xFEFEFE)
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE)
+				.specialEffects(new BiomeAmbience.Builder()
+						.skyColor(0x7FA1FF)
+						.fogColor(0xC0D8FF)
+						.waterColor(0x3F76E4)
+						.waterFogColor(0x050533)
+						.foliageColorOverride(0xFEFEFE)
+						.grassColorOverride(0xFEFEFE)
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
 						.build())
-				.withGenerationSettings(generationSettings.build())
-				.withMobSpawnSettings(spawnInfo.build())
+				.generationSettings(generationSettings.build())
+				.mobSpawnSettings(spawnInfo.build())
 				.build();
 	}
 
@@ -161,47 +161,47 @@ public class PolarizingBiomes
 	{
 		MobSpawnInfo.Builder spawnInfo = new MobSpawnInfo.Builder();
 		BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder()
-				.withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
-				.withStructure(StructureFeatures.IGLOO)
-				.withStructure(StructureFeatures.RUINED_PORTAL_MOUNTAIN);
+				.surfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
+				.addStructureStart(StructureFeatures.IGLOO)
+				.addStructureStart(StructureFeatures.RUINED_PORTAL_MOUNTAIN);
 
 		withDefaultSettings(generationSettings);
-		DefaultBiomeFeatures.withSnowySpruces(generationSettings);
-		DefaultBiomeFeatures.withTaigaVegetation(generationSettings);
-		DefaultBiomeFeatures.withEmeraldOre(generationSettings);
-		DefaultBiomeFeatures.withInfestedStone(generationSettings);
-		DefaultBiomeFeatures.withSnowyBiomeMobs(spawnInfo);
+		DefaultBiomeFeatures.addSnowyTrees(generationSettings);
+		DefaultBiomeFeatures.addTaigaTrees(generationSettings);
+		DefaultBiomeFeatures.addExtraEmeralds(generationSettings);
+		DefaultBiomeFeatures.addInfestedStone(generationSettings);
+		DefaultBiomeFeatures.snowySpawns(spawnInfo);
 		return new Biome.Builder()
 				.precipitation(RainType.SNOW)
-				.category(Category.ICY)
+				.biomeCategory(Category.ICY)
 				.depth(2.0F)
 				.scale(0.6F)
 				.temperature(-0.5F)
 				.downfall(0.5F)
-				.setEffects(new BiomeAmbience.Builder()
-						.withSkyColor(0x7FA1FF)
-						.setFogColor(0xC0D8FF)
-						.setWaterColor(0x3F76E4)
-						.setWaterFogColor(0x050533)
-						.setMoodSound(MoodSoundAmbience.DEFAULT_CAVE)
+				.specialEffects(new BiomeAmbience.Builder()
+						.skyColor(0x7FA1FF)
+						.fogColor(0xC0D8FF)
+						.waterColor(0x3F76E4)
+						.waterFogColor(0x050533)
+						.ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
 						.build())
-				.withGenerationSettings(generationSettings.build())
-				.withMobSpawnSettings(spawnInfo.build())
+				.generationSettings(generationSettings.build())
+				.mobSpawnSettings(spawnInfo.build())
 				.build();
 	}
 
 	private static final void withDefaultSettings(BiomeGenerationSettings.Builder generationSettings)
 	{
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(generationSettings);
-		DefaultBiomeFeatures.withCavesAndCanyons(generationSettings);
-		DefaultBiomeFeatures.withMonsterRoom(generationSettings);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(generationSettings);
-		DefaultBiomeFeatures.withOverworldOres(generationSettings);
-		DefaultBiomeFeatures.withDisks(generationSettings);
-		DefaultBiomeFeatures.withLavaAndWaterSprings(generationSettings);
-		DefaultBiomeFeatures.withDefaultFlowers(generationSettings);
-		DefaultBiomeFeatures.withForestGrass(generationSettings);
-		DefaultBiomeFeatures.withFrozenTopLayer(generationSettings);
-		generationSettings.withFeature(Decoration.TOP_LAYER_MODIFICATION, SnowUnderTrees.SNOW_UNDER_TREES);
+		DefaultBiomeFeatures.addDefaultOverworldLandStructures(generationSettings);
+		DefaultBiomeFeatures.addDefaultCarvers(generationSettings);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(generationSettings);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(generationSettings);
+		DefaultBiomeFeatures.addDefaultOres(generationSettings);
+		DefaultBiomeFeatures.addDefaultSoftDisks(generationSettings);
+		DefaultBiomeFeatures.addDefaultSprings(generationSettings);
+		DefaultBiomeFeatures.addDefaultFlowers(generationSettings);
+		DefaultBiomeFeatures.addForestGrass(generationSettings);
+		DefaultBiomeFeatures.addSurfaceFreezing(generationSettings);
+		generationSettings.addFeature(Decoration.TOP_LAYER_MODIFICATION, SnowUnderTrees.SNOW_UNDER_TREES);
 	}
 }
