@@ -34,7 +34,7 @@ public class PolarizingBiomeFeatures
 			new StraightTrunkPlacer(12, 15, 3),
 			new SimpleStateProvider(Blocks.SPRUCE_LEAVES.defaultBlockState()),
 			new SimpleStateProvider(Blocks.SPRUCE_SAPLING.defaultBlockState()),
-			new SlimTreeFoliagePlacer(UniformInt.of(2, 0), UniformInt.of(0, 0), 1),
+			new SlimTreeFoliagePlacer(UniformInt.of(0, 2), UniformInt.of(0, 0), 1),
 			new TwoLayersFeatureSize(2, 0, 2)).ignoreVines().build();
 	public static final ConfiguredFeature<?,?> OAK_TREES = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, PolarizingBiomes.MODID + ":oak_trees", Features.OAK.decorated(Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.1F, 1))));
 	public static final ConfiguredFeature<?,?> SPRUCE_TREES_LAKES = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, PolarizingBiomes.MODID + ":spruce_trees_lakes", Features.SPRUCE.decorated(Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(1, 0.1F, 0))));
